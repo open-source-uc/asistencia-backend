@@ -8,6 +8,7 @@ from app.db.dependencies import get_db_session
 from app.db.models import Student
 from app.schemas.student import StudentCreate
 
+
 class StudentDAO:
     """Class for accessing student data."""
 
@@ -16,9 +17,9 @@ class StudentDAO:
 
     async def create(self, student_create: StudentCreate):
         """
-            Creates a student.
+        Creates a student.
 
-            :param record: student to create.
+        :param record: student to create.
         """
         instance = Student(**student_create.dict())
 
@@ -38,13 +39,18 @@ class StudentDAO:
 
         return list(raw_records.scalars().fetchall())
 
-    async def get_all_students_on_course(self, course_id: str, limit: int = 100, offset: int = 0) -> List[Student]:
+    async def get_all_students_on_course(
+        self, course_id: str, limit: int = 100, offset: int = 0
+    ) -> List[Student]:
         """
         Get all Student with limit/offset pagination.
         """
 
         raw_records = await self.session.execute(
-            select(Student).where(Student.course_id == course_id).limit(limit).offset(offset),
+            select(Student)
+            .where(Student.course_id == course_id)
+            .limit(limit)
+            .offset(offset),
         )
 
         return list(raw_records.scalars().fetchall())

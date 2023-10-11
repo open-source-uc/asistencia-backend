@@ -7,11 +7,12 @@ from fastapi.param_functions import Depends
 
 router = APIRouter()
 
+
 @router.post("/")
 async def create_course_activity(
     course_id: str,
     course_activity: Annotated[CourseActivityCreate, Body(...)],
-    dao: CourseActivityDAO = Depends()
+    dao: CourseActivityDAO = Depends(),
 ) -> CourseActivity:
     """
     Creates an course_activity.
@@ -19,6 +20,7 @@ async def create_course_activity(
 
     course_activity.course_id = course_id
     return CourseActivity.from_orm(await dao.create(course_activity))
+
 
 @router.get("/")
 async def get_all_course_activities(

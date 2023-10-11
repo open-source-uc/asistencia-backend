@@ -8,6 +8,7 @@ from app.db.dependencies import get_db_session
 from app.db.models import CourseActivity
 from app.schemas.course_activity import CourseActivityCreate
 
+
 class CourseActivityDAO:
     """Class for accessing CourseActivity data."""
 
@@ -16,9 +17,9 @@ class CourseActivityDAO:
 
     async def create(self, record: CourseActivity):
         """
-            Creates a CourseActivity.
+        Creates a CourseActivity.
 
-            :param record: CourseActivity to create.
+        :param record: CourseActivity to create.
         """
         instance = CourseActivity(**record.dict())
 
@@ -38,13 +39,18 @@ class CourseActivityDAO:
 
         return list(raw_records.scalars().fetchall())
 
-    async def get_all_activities_on_course(self, course_id: str, limit: int = 100, offset: int = 0) -> List[CourseActivity]:
+    async def get_all_activities_on_course(
+        self, course_id: str, limit: int = 100, offset: int = 0
+    ) -> List[CourseActivity]:
         """
         Get all CourseActivities with limit/offset pagination.
         """
 
         raw_records = await self.session.execute(
-            select(CourseActivity).where(CourseActivity.course_id == course_id).limit(limit).offset(offset),
+            select(CourseActivity)
+            .where(CourseActivity.course_id == course_id)
+            .limit(limit)
+            .offset(offset),
         )
 
         return list(raw_records.scalars().fetchall())

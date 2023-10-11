@@ -8,6 +8,7 @@ from app.db.dependencies import get_db_session
 from app.db.models import Course
 from app.schemas.course import CourseCreate
 
+
 class CourseDAO:
     """Class for accessing course data."""
 
@@ -16,9 +17,9 @@ class CourseDAO:
 
     async def create(self, record: Course):
         """
-            Creates a course.
+        Creates a course.
 
-            :param record: course to create.
+        :param record: course to create.
         """
         instance = Course(**record.dict())
 

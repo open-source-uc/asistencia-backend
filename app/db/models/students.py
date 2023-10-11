@@ -18,11 +18,14 @@ class Student(Base):
 
     __tablename__ = "student"
 
-    id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4)
-    course_id: Mapped[UUID] = mapped_column(UUID(as_uuid=True), ForeignKey('course.id'), nullable=False)
+    id: Mapped[UUID] = mapped_column(
+        UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4
+    )
+    course_id: Mapped[UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("course.id"), nullable=False
+    )
     attendance_id: Mapped[String] = mapped_column(String, nullable=False)
 
     course_activity_records = relationship(
-        "CourseStudentActivityRecord",
-        backref=backref("student")
+        "CourseStudentActivityRecord", backref=backref("student")
     )
