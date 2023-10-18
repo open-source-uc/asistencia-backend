@@ -102,7 +102,7 @@ class CourseStudentActivityRecordDAO:
         # TODO: fix bug where it fills the matrix with the same value
         query = (
             select(
-                Student.id,
+                Student.attendance_id,
                 func.json_object_agg(
                     CourseActivity.slug,
                     func.coalesce(CourseStudentActivityRecord.id, None),
@@ -118,6 +118,7 @@ class CourseStudentActivityRecordDAO:
             )
             .where(
                 Student.course_id == course_id,
+                CourseStudentActivityRecord.course_activity_id == CourseActivity.id,
                 CourseActivity.slug.in_(activities),
                 Student.attendance_id.in_(students_attendance_ids),
             )
