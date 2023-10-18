@@ -1,0 +1,16 @@
+name: Deploy to on-premises server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST to deploy endpoint
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+            -d '{"ref": "${{ github.sha }}"}' \
+            ${{ secrets.DEPLOY_ENDPOINT }}

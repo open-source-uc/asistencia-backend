@@ -3,6 +3,10 @@ import uvicorn
 from app.gunicorn_runner import GunicornApplication
 from app.settings import settings
 
+from app.db.models import load_all_models
+
+load_all_models()
+
 
 def main() -> None:
     """Entrypoint of the application."""

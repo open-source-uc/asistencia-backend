@@ -1,6 +1,12 @@
 """app models."""
 import pkgutil
 from pathlib import Path
+from app.db.models.course_activities import CourseActivity  # noqa: F401
+from app.db.models.course_student_activity_records import (
+    CourseStudentActivityRecord,
+)  # noqa: F401
+from app.db.models.courses import Course  # noqa: F401
+from app.db.models.students import Student  # noqa: F401
 
 
 def load_all_models() -> None:

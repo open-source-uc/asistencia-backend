@@ -4,7 +4,6 @@ from app.db.models.users import UserCreate  # type: ignore
 from app.db.models.users import UserRead  # type: ignore
 from app.db.models.users import UserUpdate  # type: ignore
 from app.db.models.users import api_users  # type: ignore
-from app.db.models.users import auth_cookie  # type: ignore
 from app.db.models.users import auth_jwt  # type: ignore
 
 router = APIRouter()
