@@ -1,19 +1,21 @@
 from fastapi.routing import APIRouter
 
 from app.web.api import (
-    docs,
-    monitoring,
-    users,
     attendance,
     course,
-    student,
     course_activity,
+    docs,
+    monitoring,
+    spreadhsets,
+    student,
+    users,
 )
 
 api_router = APIRouter()
 api_router.include_router(monitoring.router)
 api_router.include_router(users.router)
 api_router.include_router(docs.router)
+api_router.include_router(spreadhsets.router, prefix="/sheets", tags=["sheets"])
 api_router.include_router(course.router, prefix="/courses", tags=["course"])
 api_router.include_router(
     student.router, prefix="/courses/{course_id}/students", tags=["student"]
