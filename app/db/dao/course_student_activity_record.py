@@ -97,9 +97,15 @@ class CourseStudentActivityRecordDAO:
         The returned array should be a list of lists, where each list
         represents a student and each element in the list represents an activity.
         """
-        # TODO: match with hashed ids
-        # TODO: add something to allow matching the order of the students (return back the attendances ids?)
-        # TODO: fix bug where it fills the matrix with the same value
+        # TODO: Esta función debería hacer lo siguiente:
+        # - Hashear cada elemento de students_attendance_ids
+        # - Consultar usando una tabla inline con formato (index, id_hasheado)
+        # - Mapear el resultado de la consulta con los ids originales
+        # - Retornar un JSON en formato
+        # { [id_alumno_sin_hash]: { [slug_actividad]: <created_at> } }
+
+        # Ahora se asume que los students_attendance_ids ya está heasheado
+
         query = (
             select(
                 Student.attendance_id,

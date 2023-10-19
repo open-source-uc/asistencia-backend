@@ -12,7 +12,7 @@ class SpreadsheetsPayload(BaseModel):
     activities_slugs: list[str]
 
 
-@router.post("/check_assistance", tags=["spreadhsets"])
+@router.post("/check_assistance")
 async def check_assistance(
     payload: SpreadsheetsPayload, dao: CourseStudentActivityRecordDAO = Depends()
 ):
@@ -21,8 +21,10 @@ async def check_assistance(
     and activity_slug columns.
     """
 
-    return await dao.get_activity_matrix(
+    activity_matrix = await dao.get_activity_matrix(
         activities=payload.activities_slugs,
         students_attendance_ids=payload.students_ids,
         course_id=payload.course_id,
     )
+
+    return activity_matrix
