@@ -89,49 +89,73 @@ class CourseStudentActivityRecordDAO:
         rows = await self.session.execute(query)
         return list(rows.scalars().fetchall())
 
-    async def get_activity_matrix(
+    async def get_for_many(
         self, course_id: str, students_attendance_ids: List[str], activities: List[str]
     ):
         """
-        Get the [student] x [activity] matrix.
-        The returned array should be a list of lists, where each list
-        represents a student and each element in the list represents an activity.
+        Gets every assistance of each activity for each student in a course.
+        :param course_id: The course id.
+        :param students_attendance_ids: The list of students ids.
+        :param activities: The list of activities slugs.
         """
-        # TODO: Esta función debería hacer lo siguiente:
-        # - Hashear cada elemento de students_attendance_ids
-        # - Consultar usando una tabla inline con formato (index, id_hasheado)
-        # - Mapear el resultado de la consulta con los ids originales
-        # - Retornar un JSON en formato
-        # { [id_alumno_sin_hash]: { [slug_actividad]: <created_at> } }
+
+        # TODO: falta manejar el hash
 
         # Ahora se asume que los students_attendance_ids ya está heasheado
+        students_query = select(
+            Student.id.label("student_id"),
+            # TODO: Esto debería ser un arreglo
+            Student.attendance_id.label("student_code"),
+        ).where(
+            Student.course_id == course_id,
+            Student.attendance_id.in_(students_attendance_ids),
+        )
+        students_with = students_query.cte("students")
 
-        query = (
+        activities_query = select(
+            CourseActivity.id.label("activity_id"),
+            CourseActivity.slug,
+        ).where(
+            CourseActivity.course_id == course_id,
+            CourseActivity.slug.in_(activities),
+        )
+        activities_with = activities_query.cte("activities")
+
+        assistance_query = (
             select(
-                Student.attendance_id,
-                func.json_object_agg(
-                    CourseActivity.slug,
-                    func.coalesce(CourseStudentActivityRecord.id, None),
-                ).label("activities"),
+                students_with.c.student_code.label("student_code"),
+                activities_with.c.slug.label("activity_slug"),
+                CourseStudentActivityRecord.id,
             )
             .join(
                 CourseStudentActivityRecord,
-                Student.id == CourseStudentActivityRecord.student_id,
+                CourseStudentActivityRecord.student_id == students_with.c.student_id,
             )
             .join(
                 CourseActivity,
-                CourseActivity.course_id == Student.course_id,
+                CourseActivity.id == CourseStudentActivityRecord.course_activity_id,
             )
-            .where(
-                Student.course_id == course_id,
-                CourseStudentActivityRecord.course_activity_id == CourseActivity.id,
-                CourseActivity.slug.in_(activities),
-                Student.attendance_id.in_(students_attendance_ids),
+        )
+        assistance_with = assistance_query.cte("assistance_query")
+
+        inner_agg_subquery = (
+            select(
+                assistance_with.c.student_code,
+                func.json_object_agg(
+                    assistance_with.c.activity_slug,
+                    func.json_build_object("created_at", 0),
+                ).label("activity_data"),
             )
-            .group_by(
-                Student.id,
+            .group_by(assistance_with.c.student_code)
+            .alias("inner_agg_subquery")
+        )
+        final_query = select(
+            func.json_object_agg(
+                inner_agg_subquery.c.student_code, inner_agg_subquery.c.activity_data
             )
         )
 
-        rows = await self.session.execute(query)
-        return {k: v for k, v in rows.fetchall()}
+        result = await self.session.execute(final_query)
+        mapping = result.scalars().first()
+
+        return mapping
