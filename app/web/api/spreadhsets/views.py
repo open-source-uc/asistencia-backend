@@ -21,10 +21,10 @@ async def check_assistance(
     and activity_slug columns.
     """
 
-    activity_matrix = await dao.get_activity_matrix(
+    assistance = await dao.get_for_many(
         activities=payload.activities_slugs,
         students_attendance_ids=payload.students_ids,
         course_id=payload.course_id,
     )
 
-    return activity_matrix
+    return assistance
