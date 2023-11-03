@@ -27,7 +27,7 @@ def upgrade() -> None:
             primary_key=True,
         ),
         sa.Column("course_id", sa.UUID(), nullable=False),
-        sa.Column("attendance_id", sa.String(length=100), nullable=False),
+        sa.Column("attendance_codes", sa.ARRAY(sa.String()), nullable=False),
         sa.ForeignKeyConstraint(
             ["course_id"],
             ["course.id"],

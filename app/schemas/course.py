@@ -8,11 +8,7 @@ class CourseBase(BaseModel):
     """Represents a course entity."""
 
     name: str
-    code: str
-    year: int
-    semester: str
-    section: str
-    enabled: bool
+    archived: bool
 
 
 class CourseCreate(CourseBase):
