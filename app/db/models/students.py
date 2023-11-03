@@ -7,6 +7,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import Column, String, Boolean, DateTime, UUID, ForeignKey
 from sqlalchemy.orm import relationship, backref
 from sqlalchemy.ext.associationproxy import association_proxy
+from sqlalchemy.dialects.postgresql import ARRAY
 
 from app.db.base import Base
 from app.db.dependencies import get_db_session
@@ -24,7 +25,9 @@ class Student(Base):
     course_id: Mapped[UUID] = mapped_column(
         UUID(as_uuid=True), ForeignKey("course.id"), nullable=False
     )
-    attendance_id: Mapped[String] = mapped_column(String, nullable=False)
+    attendance_codes: Mapped[ARRAY[str]] = mapped_column(
+        ARRAY(String), nullable=False, default=[]
+    )
 
     course_activity_records = relationship(
         "CourseStudentActivityRecord", backref=backref("student")
