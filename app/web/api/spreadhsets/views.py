@@ -17,7 +17,7 @@ class SpreadsheetsPayload(BaseModel):
 async def check_assistance(
     payload: SpreadsheetsPayload,
     dao: CourseStudentActivityRecordDAO = Depends(),
-    current_active_user = Depends(UserCourseMiddleware),
+    current_active_user = Depends(UserCourseMiddleware()),
 ):
     """
     Checks the assistance given a user_id rows

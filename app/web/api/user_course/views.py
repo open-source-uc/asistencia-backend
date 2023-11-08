@@ -23,7 +23,7 @@ async def create(
 async def get_all_user_for_course(
     course_id: str,
     dao: UserCourseDao = Depends(),
-    current_active_user = Depends(UserCourseMiddleware)
+    current_active_user = Depends(UserCourseMiddleware())
 ) -> List[UserCourse]:
     """Get all user_course for a course."""
     return await dao.get_all_user_for_course(course_id)

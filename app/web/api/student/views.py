@@ -13,7 +13,7 @@ async def create_student(
     course_id: str,
     student: Annotated[StudentCreate, Body(...)],
     dao: StudentDAO = Depends(),
-    current_active_user = Depends(UserCourseMiddleware)
+    current_active_user = Depends(UserCourseMiddleware())
 ) -> Student:
     """
     Creates an student.
@@ -29,7 +29,7 @@ async def get_all_students(
     limit: int = 100,
     offset: int = 0,
     dao: StudentDAO = Depends(),
-    current_active_user = Depends(UserCourseMiddleware),
+    current_active_user = Depends(UserCourseMiddleware()),
 ):
     """
     Gets all students.

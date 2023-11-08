@@ -18,7 +18,7 @@ async def create_attendance_record(
     activity_slug: str,
     attendance_record: Annotated[CourseStudentActivityRecordCreate, Body(...)],
     dao: CourseStudentActivityRecordDAO = Depends(),
-    current_active_user = Depends(UserCourseMiddleware),
+    current_active_user = Depends(UserCourseMiddleware()),
 ):
     """
     Creates an attendance record for a student in a course activity.
@@ -30,7 +30,7 @@ async def create_attendance_record(
 
 
 @router.get("/")
-async def get_attendance_records(dao: CourseStudentActivityRecordDAO = Depends(), current_active_user = Depends(UserCourseMiddleware)):
+async def get_attendance_records(dao: CourseStudentActivityRecordDAO = Depends(), current_active_user = Depends(UserCourseMiddleware())):
     """
     Gets all attendance records.
     """
