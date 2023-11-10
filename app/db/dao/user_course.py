@@ -51,7 +51,8 @@ class UserCourseDao:
             select(UserCourse)
             .where(UserCourse.course_id == course_id)
             .limit(limit)
-            .offset(offset),
+            .offset(offset)
+            .distinct(UserCourse.user_email)
         )
 
         return list(raw_records.scalars().fetchall())
