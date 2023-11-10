@@ -38,8 +38,8 @@ class CourseStudentActivityRecordDAO:
         student = (
             await self.session.execute(
                 select(Student).where(
-                    Student.attendance_id == record.student_attendance_id
-                    and Student.course_id == course_id
+                    Student.attendance_codes.any(record.student_attendance_id),
+                    Student.course_id == course_id
                 )
             )
         ).scalar()
