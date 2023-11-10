@@ -7,6 +7,7 @@ from app.db.models.course_student_activity_records import (
 )  # noqa: F401
 from app.db.models.courses import Course  # noqa: F401
 from app.db.models.students import Student  # noqa: F401
+from app.db.models.user_courses import UserCourse  # noqa: F401
 
 
 def load_all_models() -> None:

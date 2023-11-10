@@ -25,12 +25,8 @@ def upgrade() -> None:
             server_default=sa.text("uuid_generate_v4()"),
             primary_key=True,
         ),
-        sa.Column("name", sa.String(length=100), nullable=False),
-        sa.Column("code", sa.String(length=10), nullable=False),
-        sa.Column("semester", sa.String(length=10), nullable=False),
-        sa.Column("section", sa.String(length=10), nullable=False),
-        sa.Column("year", sa.Integer(), nullable=False),
-        sa.Column("enabled", sa.Boolean(), nullable=False),
+        sa.Column("name", sa.String(length=100), nullable=False, unique=True),
+        sa.Column("archived", sa.Boolean(), nullable=False),
         sa.PrimaryKeyConstraint("id"),
     )
 

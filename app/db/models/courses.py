@@ -32,11 +32,7 @@ class Course(Base):
         UUID(as_uuid=True), primary_key=True, index=True, default=uuid.uuid4
     )
     name: Mapped[String] = mapped_column(String, nullable=False)
-    code: Mapped[String] = mapped_column(String, nullable=False)
-    semester: Mapped[String] = mapped_column(String, nullable=False)
-    year: Mapped[Integer] = mapped_column(Integer, nullable=False)
-    section: Mapped[String] = mapped_column(String, nullable=False)
-    enabled: Mapped[Boolean] = mapped_column(Boolean, nullable=False, default=True)
+    archived: Mapped[Boolean] = mapped_column(Boolean, nullable=False, default=False)
 
     course_activities = relationship("CourseActivity", backref=backref("course"))
     students = relationship("Student", backref=backref("course"))

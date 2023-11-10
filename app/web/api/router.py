@@ -9,12 +9,14 @@ from app.web.api import (
     spreadhsets,
     student,
     users,
+    user_course,
 )
 
 api_router = APIRouter()
 api_router.include_router(monitoring.router)
 api_router.include_router(users.router)
 api_router.include_router(docs.router)
+api_router.include_router(user_course.router, prefix="/user_courses", tags=["user_course"])
 api_router.include_router(spreadhsets.router, prefix="/sheets", tags=["sheets"])
 api_router.include_router(course.router, prefix="/courses", tags=["course"])
 api_router.include_router(

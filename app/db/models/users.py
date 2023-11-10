@@ -85,4 +85,5 @@ backends = [
 
 api_users = FastAPIUsers[User, uuid.UUID](get_user_manager, backends)
 
-current_active_user = api_users.current_user(active=True)
+current_active_user = api_users.current_user()
+current_superuser = api_users.current_user(superuser=True)

@@ -4,6 +4,7 @@ from app.db.dao.course_activity import CourseActivityDAO
 
 from fastapi import APIRouter, Body
 from fastapi.param_functions import Depends
+from app.web.middlewares.user_course import UserCourseMiddleware
 
 router = APIRouter()
 
@@ -13,6 +14,7 @@ async def create_course_activity(
     course_id: str,
     course_activity: Annotated[CourseActivityCreate, Body(...)],
     dao: CourseActivityDAO = Depends(),
+    current_active_user = Depends(UserCourseMiddleware()),
 ) -> CourseActivity:
     """
     Creates an course_activity.
@@ -28,6 +30,7 @@ async def get_all_course_activities(
     dao: CourseActivityDAO = Depends(),
     limit: int = 100,
     offset: int = 0,
+    current_active_user = Depends(UserCourseMiddleware()),
 ):
     """
     Gets all course_activities.
