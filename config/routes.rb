@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   scope path: '/api' do
     api_version(module: 'Api::Exposed::V1', path: { value: 'v1' }, defaults: { format: 'json' }) do
+      resources :courses
     end
   end
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
   namespace :api, defaults: { format: :json } do
     namespace :internal do
-      resources :courses
     end
   end
   devise_for :users

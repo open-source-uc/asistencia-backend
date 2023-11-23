@@ -26,7 +26,7 @@ class Api::Exposed::V1::CoursesController < Api::Exposed::V1::BaseController
   private
 
   def course
-    @course ||= current_user.courses.find_by!(id: params[:id])
+    @course ||= current_user.courses.friendly.find(params[:id])
   end
 
   def course_params
