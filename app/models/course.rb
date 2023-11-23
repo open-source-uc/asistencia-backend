@@ -6,6 +6,10 @@ class Course < ApplicationRecord
 
   validates :name,
             presence: true
+
+  def users
+    User.with_roles(CourseRoles.all, self)
+  end
 end
 
 # == Schema Information
