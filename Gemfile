@@ -22,6 +22,8 @@ gem "sassc-embedded"
 gem "scout_apm"
 gem "sprockets-rails"
 gem "strong_migrations"
+gem 'friendly_id', '~> 5.4.0'
+gem "lockbox"
 gem "vite_rails"
 
 group :development do
