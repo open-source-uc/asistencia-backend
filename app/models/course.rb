@@ -1,5 +1,8 @@
 class Course < ApplicationRecord
-  validates :name, presence: true, uniqueness: true 
+  resourcify
+
+  validates :name,
+            presence: true
 end
 
 # == Schema Information

@@ -365,6 +365,7 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.2.6)
+    rolify (6.0.1)
     rouge (4.2.0)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
@@ -543,6 +544,7 @@ DEPENDENCIES
   rails (~> 7.0.8)
   rails-i18n
   redis-actionpack
+  rolify
   rspec-nc
   rspec-rails
   rspec_junit_formatter (~> 0.4)
