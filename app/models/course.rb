@@ -2,6 +2,7 @@ class Course < ApplicationRecord
   resourcify
 
   has_many :students, dependent: :destroy
+  has_many :activities, dependent: :destroy
 
   validates :name,
             presence: true
