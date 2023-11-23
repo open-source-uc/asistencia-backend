@@ -1,6 +1,8 @@
 class Course < ApplicationRecord
   resourcify
 
+  has_many :students, dependent: :destroy
+
   validates :name,
             presence: true
 end
