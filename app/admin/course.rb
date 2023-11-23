@@ -1,11 +1,12 @@
 ActiveAdmin.register Course do
-  permit_params :name, :enabled
+  permit_params :name, :enabled, :slug
 
   index do
     selectable_column
     id_column
     column :name
     column :enabled
+    column :slug
     actions
   end
 
@@ -16,6 +17,7 @@ ActiveAdmin.register Course do
     f.inputs do
     f.input :name
     f.input :enabled
+    f.input :slug
     end
     f.actions
   end
@@ -24,6 +26,7 @@ ActiveAdmin.register Course do
     attributes_table do
       row :name
       row :enabled
+      row :slug
 
       panel "Students" do
         table_for course.students do

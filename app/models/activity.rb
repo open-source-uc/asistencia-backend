@@ -1,4 +1,7 @@
 class Activity < ApplicationRecord
+  extend FriendlyId
+  friendly_id :slug, use: :slugged
+
   belongs_to :course
   has_many :attendances, dependent: :destroy
 
@@ -16,10 +19,12 @@ end
 #  date                   :date
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
+#  slug                   :string
 #
 # Indexes
 #
 #  index_activities_on_course_id  (course_id)
+#  index_activities_on_slug       (slug) UNIQUE
 #
 # Foreign Keys
 #
