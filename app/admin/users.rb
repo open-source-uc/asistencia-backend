@@ -10,6 +10,7 @@ ActiveAdmin.register User do
   show do
     attributes_table do
       row :email
+      row :authentication_token
 
       panel "Courses" do
         table_for user.courses do
