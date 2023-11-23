@@ -135,6 +135,7 @@ GEM
       xpath (~> 3.2)
     case_transform (0.2)
       activesupport
+    choice (0.2.0)
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
@@ -321,6 +322,11 @@ GEM
       activesupport (>= 5.0.0)
       minitest
       nokogiri (>= 1.6)
+    rails-erd (1.7.2)
+      activerecord (>= 4.2)
+      activesupport (>= 4.2)
+      choice (~> 0.2.0)
+      ruby-graphviz (~> 1.2)
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
@@ -429,6 +435,8 @@ GEM
       rubocop (~> 1.40)
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
@@ -542,6 +550,7 @@ DEPENDENCIES
   rack-cors (~> 1.1)
   rack-timeout
   rails (~> 7.0.8)
+  rails-erd
   rails-i18n
   redis-actionpack
   rolify

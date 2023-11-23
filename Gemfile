@@ -31,6 +31,7 @@ group :development do
   gem "annotate", "~> 3.0"
   gem "listen"
   gem "spring"
+  gem 'rails-erd'
 end
 
 group :development, :test do
