@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_032903) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_23_033249) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -48,6 +48,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_032903) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "attendances", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "activity_id", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_attendances_on_activity_id"
+    t.index ["student_id"], name: "index_attendances_on_student_id"
+    t.index ["user_id"], name: "index_attendances_on_user_id"
   end
 
   create_table "courses", force: :cascade do |t|
@@ -96,5 +107,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_032903) do
   end
 
   add_foreign_key "activities", "courses"
+  add_foreign_key "attendances", "activities"
+  add_foreign_key "attendances", "students"
+  add_foreign_key "attendances", "users"
   add_foreign_key "students", "courses"
 end

@@ -1,5 +1,6 @@
 class Student < ApplicationRecord
   belongs_to :course
+  has_many :attendances, dependent: :destroy
 
   validates :attendance_codes,
             presence: true

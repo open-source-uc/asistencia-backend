@@ -1,5 +1,6 @@
 class Activity < ApplicationRecord
   belongs_to :course
+  has_many :attendances, dependent: :destroy
 
   has_encrypted :name, :description
 end
