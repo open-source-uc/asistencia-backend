@@ -5,6 +5,7 @@ Rails.application.routes.draw do
         resources :students
         resources :activities
         resources :attendances
+        post 'spreadsheets', to: 'spreadsheets#index'
       end
     end
   end
