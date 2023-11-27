@@ -1,4 +1,4 @@
-class Api::Internal::StudentSerializer < ActiveModel::Serializer
+class Api::Exposed::V1::StudentSerializer < ActiveModel::Serializer
   type :student
 
   attributes(

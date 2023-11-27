@@ -5,6 +5,7 @@ class Course < ApplicationRecord
 
   has_many :students, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :attendances, through: :activities
 
   validates :name,
             presence: true

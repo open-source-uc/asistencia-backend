@@ -1,4 +1,4 @@
-class Api::Internal::ActivitySerializer < ActiveModel::Serializer
+class Api::Exposed::V1::ActivitySerializer < ActiveModel::Serializer
   type :activity
 
   attributes(

@@ -1,4 +1,4 @@
-class Api::Internal::CourseSerializer < ActiveModel::Serializer
+class Api::Exposed::V1::CourseSerializer < ActiveModel::Serializer
   type :course
 
   attributes(
