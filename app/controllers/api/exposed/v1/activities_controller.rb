@@ -1,4 +1,4 @@
-class Api::Internal::ActivitiesController < Api::Internal::BaseController
+class Api::Exposed::V1::ActivitiesController < Api::Exposed::V1::BaseController
   def index
     respond_with course.activities
   end
@@ -27,7 +27,7 @@ class Api::Internal::ActivitiesController < Api::Internal::BaseController
   end
 
   def activity
-    @activity ||= course.activities.find(params[:id])
+    @activity ||= course.activities.friendly.find(params[:id])
   end
 
   def activity_params

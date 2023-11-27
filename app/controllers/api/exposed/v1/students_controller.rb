@@ -1,10 +1,10 @@
-class Api::Internal::StudentsController < Api::Internal::BaseController
+class Api::Exposed::V1::StudentsController < Api::Exposed::V1::BaseController
   def index
     respond_with course.students
   end
 
   def show
-    respond_with student
+    respond_with student || raise(ActiveRecord::RecordNotFound)
   end
 
   def create
@@ -27,12 +27,12 @@ class Api::Internal::StudentsController < Api::Internal::BaseController
   end
 
   def student
-    @student ||= course.students.find(params[:id])
+    @student ||= course.students.by_attendance_code(params[:id]).first
   end
 
   def student_params
     params.require(:student).permit(
-      :attendance_codes
+      attendance_codes: []
     )
   end
 end
