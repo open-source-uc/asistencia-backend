@@ -11,7 +11,7 @@ class Course < ApplicationRecord
             presence: true
 
   def users
-    User.with_roles(CourseRoles.all, self)
+    CourseRoles.all.map { |role| { role => User.select(:email, :id).with_role(role, self) } }.reduce({}, :merge)
   end
 end
 

@@ -1,7 +1,7 @@
 module CourseRoles
-  ADMIN = "admin"
-  MANAGER = "manager"
-  VIEWER = "viewer"
+  ADMIN = :admin
+  MANAGER = :manager
+  VIEWER = :viewer
 
   def self.all
     [ADMIN, MANAGER, VIEWER]
