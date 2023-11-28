@@ -6,6 +6,7 @@ gem "bullet"
 gem "data_migrate"
 gem "devise"
 gem "devise-i18n"
+gem 'devise_invitable', '~> 2.0.0'
 gem "draper", "~> 3.1"
 gem "jbuilder"
 gem "pg"
