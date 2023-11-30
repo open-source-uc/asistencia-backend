@@ -1,6 +1,6 @@
 class Api::Exposed::V1::CoursesController < Api::Exposed::V1::BaseController
   def index
-    respond_with current_user.courses
+    respond_with current_user.courses.uniq
   end
 
   def show

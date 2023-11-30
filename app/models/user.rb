@@ -12,7 +12,7 @@ class User < ApplicationRecord
   end
 
   def courses
-    Course.with_role(CourseRoles.with_read_access, self).uniq
+    Course.with_role(CourseRoles.with_read_access, self)
   end
 
   def self.find_or_invite_by(email:)
