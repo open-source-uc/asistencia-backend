@@ -33,7 +33,7 @@ class Api::Exposed::V1::SpreadsheetsController < Api::Exposed::V1::BaseControlle
       {
         code_to_check => attendances_for_student(student).map(&:activity_slug).uniq
       }
-    end
+    end.reduce({}, :merge)
   end
 
   def user
