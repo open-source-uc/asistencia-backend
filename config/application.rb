@@ -14,6 +14,10 @@ module MyApp
                  headers: :any,
                  expose: ['X-Page', 'X-PageTotal'],
                  methods: [:get, :post, :patch, :put, :delete, :options]
+        resource '*',
+                 headers: :any,
+                 expose: ['X-Page', 'X-PageTotal'],
+                 methods: [:get, :post, :patch, :put, :delete, :options]
       end
     end
 
