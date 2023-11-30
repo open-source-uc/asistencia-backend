@@ -4,8 +4,8 @@ class Api::Exposed::V1::ActivitySerializer < ActiveModel::Serializer
   attributes(
     :id,
     :course_id,
-    :name_ciphertext,
-    :description_ciphertext,
+    :name,
+    :description,
     :date,
     :created_at,
     :updated_at,
