@@ -26,7 +26,7 @@ class Api::Exposed::V1::UserCoursesController < Api::Exposed::V1::BaseController
   end
 
   def user_course_params
-    params.permit(
+    params.require(:user_course).permit(
       :email,
       :role
     )
