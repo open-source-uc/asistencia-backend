@@ -1,6 +1,6 @@
 class Api::Exposed::V1::SpreadsheetsController < Api::Exposed::V1::BaseController
   def index
-    respond_with activity_student_map
+    respond_with activities_for_students
   end
 
   private
@@ -10,18 +10,30 @@ class Api::Exposed::V1::SpreadsheetsController < Api::Exposed::V1::BaseControlle
   end
 
   def activities
-    @activities ||= course.activities.where(slug: params[:activity_slugs])
+    @activities ||= course.activities.where(slug: params[:activity_slugs]).uniq.compact
   end
 
   def students
-    @students ||= course.students.for_attendance_codes(params[:student_codes])
+    @students ||= course.students.for_attendance_codes(params[:student_codes]).uniq.compact
   end
 
-  def activity_student_map
-    activities.uniq.map do |activity|
-      students_present = activity.attendances.where(student: students).map(&:student).uniq
-      [activity.slug, students_present.map(&:attendance_codes)]
-    end.to_h
+  def attendances_for_student(student)
+    Attendance.includes([:activity]).where(
+      student: student,
+      activity: activities
+    ).uniq.compact
+  end
+
+  def activities_for_students
+    students.map do |student|
+      code_to_check = params[:student_codes].find do |code|
+        student.attendance_codes.include?(code)
+      end
+
+      {
+        code_to_check => attendances_for_student(student).map(&:activity_slug).uniq
+      }
+    end
   end
 
   def user

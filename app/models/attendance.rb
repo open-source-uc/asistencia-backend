@@ -2,6 +2,8 @@ class Attendance < ApplicationRecord
   belongs_to :student
   belongs_to :activity
   belongs_to :user, optional: true
+
+  delegate :slug, to: :activity, prefix: true
 end
 
 # == Schema Information
