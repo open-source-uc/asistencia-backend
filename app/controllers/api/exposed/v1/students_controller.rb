@@ -1,6 +1,6 @@
 class Api::Exposed::V1::StudentsController < Api::Exposed::V1::BaseController
   def index
-    respond_with course.students
+    respond_with course.students, each_serializer: Api::Exposed::V1::StudentSerializer
   end
 
   def show
