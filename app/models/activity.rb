@@ -1,7 +1,7 @@
 class Activity < ApplicationRecord
   belongs_to :course
   has_many :attendances, dependent: :destroy
-  validates [:course, :slug], uniqueness: true
+  validates :slug, uniqueness: { scope: :course_id }
 
   def self.by_slug_or_id(slug_or_id)
     find_by(slug: slug_or_id) || find(slug_or_id)
