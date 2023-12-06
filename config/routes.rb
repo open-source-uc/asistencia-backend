@@ -8,6 +8,7 @@ Rails.application.routes.draw do
         post 'spreadsheets', to: 'spreadsheets#index'
         resources :user_courses do
           get 'me', on: :collection
+          post 'batch_create', on: :collection
         end
       end
     end

@@ -18,6 +18,10 @@ class User < ApplicationRecord
   def self.find_or_invite_by(email:)
     find_by(email: email) || create!(email: email, password: Devise.friendly_token.first(8))
   end
+
+  def self.find_or_create_by(email:)
+    find_by(email: email) || create!(email: email, password: Devise.friendly_token.first(8))
+  end
 end
 
 # == Schema Information
