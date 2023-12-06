@@ -12,9 +12,11 @@ class Api::Exposed::V1::UserCoursesController < Api::Exposed::V1::BaseController
   end
 
   def batch_create
-    respond_with new_users.each do |user|
+    new_users.map do |user|
       user.add_role(user_course_params[:role], course)
     end
+
+    respond_with course.reload.users
   end
 
   def destroy
