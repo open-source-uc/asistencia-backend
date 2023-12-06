@@ -1,9 +1,11 @@
 class Activity < ApplicationRecord
-  extend FriendlyId
-  friendly_id :slug, use: :slugged
-
   belongs_to :course
   has_many :attendances, dependent: :destroy
+  validates [:course, :slug], uniqueness: true
+
+  def self.by_slug_or_id(slug_or_id)
+    find_by(slug: slug_or_id) || find(slug_or_id)
+  end
 
   has_encrypted :name, :description
 end
@@ -23,8 +25,9 @@ end
 #
 # Indexes
 #
-#  index_activities_on_course_id  (course_id)
-#  index_activities_on_slug       (slug) UNIQUE
+#  index_activities_on_course_id           (course_id)
+#  index_activities_on_course_id_and_slug  (course_id,slug) UNIQUE
+#  index_activities_on_slug                (slug) UNIQUE
 #
 # Foreign Keys
 #

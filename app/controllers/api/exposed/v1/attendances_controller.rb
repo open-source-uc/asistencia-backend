@@ -31,7 +31,7 @@ class Api::Exposed::V1::AttendancesController < Api::Exposed::V1::BaseController
   end
 
   def activity
-    @activity ||= course.activities.friendly.find(attendance_params[:activity_slug])
+    @activity ||= course.activities.by_slug_or_id(attendance_params[:activity_slug])
   end
 
   def user

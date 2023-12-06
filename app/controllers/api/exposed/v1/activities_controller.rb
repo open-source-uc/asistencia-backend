@@ -27,7 +27,7 @@ class Api::Exposed::V1::ActivitiesController < Api::Exposed::V1::BaseController
   end
 
   def activity
-    @activity ||= course.activities.friendly.find(params[:id])
+    @activity ||= course.activities.by_slug_or_id(params[:id])
   end
 
   def activity_params
