@@ -17,7 +17,7 @@ end
 #  id                     :bigint(8)        not null, primary key
 #  course_id              :bigint(8)        not null
 #  name_ciphertext        :string           not null
-#  description_ciphertext :string           not null
+#  description_ciphertext :string
 #  date                   :date
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
@@ -27,7 +27,6 @@ end
 #
 #  index_activities_on_course_id           (course_id)
 #  index_activities_on_course_id_and_slug  (course_id,slug) UNIQUE
-#  index_activities_on_slug                (slug) UNIQUE
 #
 # Foreign Keys
 #
