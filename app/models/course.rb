@@ -7,8 +7,7 @@ class Course < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :attendances, through: :activities
 
-  validates :name,
-            presence: true
+  validates :slug, uniqueness: true
 
   def users
     CourseRoles.all.map { |role| { role => User.select(:email, :id).with_role(role, self) } }.reduce({}, :merge)
