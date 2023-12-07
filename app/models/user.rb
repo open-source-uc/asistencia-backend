@@ -20,7 +20,11 @@ class User < ApplicationRecord
   end
 
   def self.find_or_create_by(email:)
-    find_by(email: email) || create!(email: email, password: Devise.friendly_token.first(8))
+    find_by(email: email) ||
+      create!(
+        email: email,
+        password: "#{email.split('@').first}.#{Time.zone.now.year}"
+      ) 
   end
 end
 
