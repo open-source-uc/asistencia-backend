@@ -10,8 +10,8 @@ Rails.application.routes.draw do
           get '/', to: 'user_courses#index'
           get 'me', on: :collection
           post 'batch_create', on: :collection
-          post 'create', on: :collection
-          delete 'destroy', on: :collection
+          post '/', on: :collection
+          delete '/', on: :collection
         end
       end
     end
