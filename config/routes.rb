@@ -6,7 +6,7 @@ Rails.application.routes.draw do
         resources :activities
         resources :attendances
         post 'spreadsheets', to: 'spreadsheets#index'
-        resources :user_courses do
+        resource :user_courses do
           get 'me', on: :collection
           post 'batch_create', on: :collection
         end
