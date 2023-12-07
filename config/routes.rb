@@ -6,9 +6,12 @@ Rails.application.routes.draw do
         resources :activities
         resources :attendances
         post 'spreadsheets', to: 'spreadsheets#index'
-        resource :user_courses do
+        resource :user_courses, only: [] do
+          get '/', to: 'user_courses#index'
           get 'me', on: :collection
           post 'batch_create', on: :collection
+          post 'create', on: :collection
+          delete 'destroy', on: :collection
         end
       end
     end
