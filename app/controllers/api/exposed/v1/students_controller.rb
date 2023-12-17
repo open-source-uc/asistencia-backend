@@ -12,9 +12,11 @@ class Api::Exposed::V1::StudentsController < Api::Exposed::V1::BaseController
   end
 
   def batch_create
-    respond_with params[:students].map do |student|
+    params[:students].map do |student|
       course.students.create!(student.permit(:display_name, attendance_codes: []))
     end
+
+    respond_with course.reload.students, each_serializer: Api::Exposed::V1::StudentSerializer
   end
 
   def update
