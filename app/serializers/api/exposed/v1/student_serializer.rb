@@ -5,6 +5,7 @@ class Api::Exposed::V1::StudentSerializer < ActiveModel::Serializer
     :id,
     :course_id,
     :attendance_codes,
+    :display_name,
     :created_at,
     :updated_at
   )

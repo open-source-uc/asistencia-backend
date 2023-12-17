@@ -32,6 +32,7 @@ class Api::Exposed::V1::StudentsController < Api::Exposed::V1::BaseController
 
   def student_params
     params.require(:student).permit(
+      :display_name,
       attendance_codes: []
     )
   end

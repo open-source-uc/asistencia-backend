@@ -21,6 +21,7 @@ end
 #  attendance_codes :string           default([]), is an Array
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
+#  display_name     :string
 #
 # Indexes
 #
