@@ -24,7 +24,8 @@ Rails.application.routes.draw do
     namespace :internal do
     end
   end
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'devise/registrations' }
+  patch '/users/me', to: 'api/exposed/v1/user#update'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
