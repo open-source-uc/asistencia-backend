@@ -11,6 +11,12 @@ class Api::Exposed::V1::StudentsController < Api::Exposed::V1::BaseController
     respond_with course.students.create!(student_params)
   end
 
+  def batch_create
+    respond_with params[:students].map do |student|
+      course.students.create!(student.permit(:display_name, attendance_codes: []))
+    end
+  end
+
   def update
     student.update!(student_params)
     respond_with student

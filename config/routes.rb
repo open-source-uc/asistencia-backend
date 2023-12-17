@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   scope path: '/api' do
     api_version(module: 'Api::Exposed::V1', path: { value: 'v1' }, defaults: { format: 'json' }) do
       resources :courses do
-        resources :students
+        resources :students do
+          post 'batch_create', on: :collection
+        end
         resources :activities
         resources :attendances
         post 'spreadsheets', to: 'spreadsheets#index'
