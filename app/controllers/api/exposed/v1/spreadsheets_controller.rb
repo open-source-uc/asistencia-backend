@@ -10,11 +10,11 @@ class Api::Exposed::V1::SpreadsheetsController < Api::Exposed::V1::BaseControlle
   end
 
   def activities
-    @activities ||= course.activities.where(slug: params[:activity_slugs]).uniq.compact
+    @activities ||= course.activities.where(slug: params[:activity_slugs])
   end
 
   def students
-    @students ||= course.students.for_attendance_codes(params[:student_codes]).uniq.compact
+    @students ||= course.students.for_attendance_codes(params[:student_codes])
   end
 
   def attendances_for_student(student)
